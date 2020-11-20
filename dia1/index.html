@@ -1,0 +1,29 @@
+<html>
+    <head>
+        <script>
+            function sum() {
+                const num1 = parseInt(document.getElementById("numero1").value);
+                const num2 = parseInt(document.getElementById("numero2").value);
+                const res = document.getElementById("result");
+
+                if (isNaN(num1) || isNaN(num2)) {
+                    res.innerText = "Alguno de los dos no es un número"
+                } else {
+                    res.innerText = "El resultado es " + (num1 + num2);
+                }
+                
+            }
+
+            window.onload = function() {
+                const el = document.getElementById("submit");
+                el.addEventListener("click", sum, false);
+            }
+        </script>
+    </head>
+    <body>
+        <input type="text" id="numero1" />
+        <input type="text" id="numero2" />
+        <input type="submit" id="submit" /><br />
+        <div id="result"></div>
+    <body>
+</html>
