@@ -1,0 +1,63 @@
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+        #year {
+            width: 365px;
+            margin-left: 100px;
+            height: 50px;
+            border: 1px solid black;
+            position: relative;
+        }
+        #progress-number {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        #progress {
+            z-index: -1;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            background: rgb(142, 187, 187);
+            height: 100%;
+            width: 5%;
+            transition: 10s;
+        }
+        
+    </style>
+    <script>
+        function setYearProgress(curTs) {
+            const curDate = new Date(curTs);
+            const curYear = curDate.getFullYear();
+            
+            const yearStart = new Date(curYear + '-01-01');
+            const leapYear = ((curYear % 4 == 0) && ((curYear % 100 != 0) || (curYear % 400 == 0)));
+            const yearDuration = (leapYear)? 366 : 365;
+            
+            const dateDiff = (curTs - yearStart) / (60*60*24*1000);
+            const yearProgress = Math.floor(dateDiff * 100 / yearDuration);
+            
+            const progressBar = document.getElementById("progress");
+            const progressNumber = document.getElementById("progress-number");
+            progressBar.style.width = `${yearProgress}%`;
+            progressNumber.innerHTML = `${yearProgress}%`;
+        }
+        
+        window.onload = function() {
+            setYearProgress(Date.now())
+        }
+    </script>
+</head>
+<body>
+    <div id="year">
+        <div id="progress-number">0%</div>
+        <div id="progress"><div class="sub-bar">&nbsp;</div></div>
+    </div>
+    <div><a href="https://github.com/flomincucci/unaSemanaDeCodigo/blob/main/dia3/index.html">Ver código fuente</a></div>
+</body>
+</html>
+        
